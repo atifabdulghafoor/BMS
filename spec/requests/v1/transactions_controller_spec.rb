@@ -4,7 +4,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::TransactionsController, type: :controller do
   describe 'POST #create' do
     subject(:create_transaction) do
-      post :create, params: params, xhr: true, format: :json
+      post :create, params: params
     end
 
     let(:user) { account.user }
@@ -13,13 +13,13 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
     let(:params) do
       {
         sender_id: account.id,
-        recipient_idL: account1.id,
+        recipient_id: account1.id,
         amount: amount
       }
     end
 
     let(:amount) { 120 }
-    
+
     context 'when user is not logged in' do
     end
 
@@ -31,7 +31,6 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
       end
 
       it ' creates transaction' do
-        byebug
       end
 
       it 'deducts sender balance' do
