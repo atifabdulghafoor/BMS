@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_02_162658) do
+ActiveRecord::Schema.define(version: 2022_03_02_173751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "account_number", null: false
+    t.string "title", null: false
+    t.decimal "balance", default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_number"], name: "index_accounts_on_account_number", unique: true
+    t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.bigint "sender_id"
+    t.bigint "recipient_id"
+    t.decimal "amount", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_transactions_on_recipient_id"
+    t.index ["sender_id"], name: "index_transactions_on_sender_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -40,4 +61,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_162658) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "accounts", "users"
+  add_foreign_key "transactions", "accounts", column: "recipient_id"
+  add_foreign_key "transactions", "accounts", column: "sender_id"
 end

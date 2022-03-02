@@ -9,4 +9,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
 
   include DeviseTokenAuth::Concerns::User
+
+  has_many :accounts, dependent: :destroy
+
+  validates :email, :name, presence: true
+  validates :email, uniqueness: true
 end
