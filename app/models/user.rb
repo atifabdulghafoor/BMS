@@ -13,5 +13,5 @@ class User < ActiveRecord::Base
   has_many :accounts, dependent: :destroy
 
   validates :email, :name, presence: true
-  validates :email, uniqueness: true
+  validates :email, uniqueness: { case_sensitive: false }
 end
