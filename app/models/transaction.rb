@@ -8,6 +8,8 @@ class Transaction < ApplicationRecord
   belongs_to :recipient, class_name: 'Account'
 
   validates :amount, numericality: { greater_than: 0.0 }
+  validates :request_digest, presence: true
+  validates :request_digest, uniqueness: true
 
   delegate :account_number, to: :sender, prefix: true
   delegate :account_number, to: :recipient, prefix: true

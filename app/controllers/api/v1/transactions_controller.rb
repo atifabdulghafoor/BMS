@@ -12,7 +12,8 @@ module Api
       private
 
       def transaction_params
-        params.require(:transaction).permit(:sender_id, :recipient_id, :amount)
+        params.require(:transaction).permit(:sender_id, :recipient_id,
+                                            :amount, :request_digest)
       end
     end
   end

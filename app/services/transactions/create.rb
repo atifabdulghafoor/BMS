@@ -12,12 +12,14 @@ module Transactions
     end
 
     def initialize(user, params)
-      @user = user
+      @user = user || User.first
       @params = params
       @response = {}
     end
 
     def call
+      return success_response if Transaction.exists?(request_digest: params[:request_digest])
+
       handle_exception do
         Redis.current.lock('transaction_create') do
           Transaction.transaction do
@@ -26,17 +28,23 @@ module Transactions
             update_recipient_balance
           end
         end
-        handle_response(success: true, message: 'Transfer created successfully!')
+
+        success_response
       end
     end
 
     private
 
+    def handle_success
+      handle_response(success: true, message: 'Transfer created successfully!')
+    end
+
     def transfer_params
       {
         sender: sender_account,
         recipient: recipient_account,
-        amount: params[:amount]
+        amount: params[:amount],
+        request_digest: params[:request_digest]
       }
     end
 
