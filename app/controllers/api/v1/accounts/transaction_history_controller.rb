@@ -1,18 +1,25 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     module Accounts
-      class TransactionHistoryController < ApplicationController
-        before_action :authenticate_user!
-
+      # TransactionHistory API for Accounts
+      class TransactionHistoryController < BaseController
         def index
-          render json: collection, status: :ok
-        end 
+          render json: collection.results[:results],
+                 meta: { pagination_info: collection.results[:pagination_info] },
+                 each_serializer: TransactionSerializer,
+                 adapter: :json,
+                 status: :ok
+        end
 
         private
 
         def collection
-          # TODO: use serializer here
-          account.transactions
+          @collection ||= TransactionsCollection.new(
+            Transaction.all,
+            params
+          )
         end
 
         def account

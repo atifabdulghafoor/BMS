@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 module Accounts
+  # Service for Accounts creation
   class Create
     include ResponseHandler
-    
+
     attr_reader :user, :params, :response
 
     def self.call(user, params)
@@ -32,8 +35,8 @@ module Accounts
 
     def account_number
       loop do
-        @account_number = Random.rand(99999999999999)
-        
+        @account_number = Random.rand(99_999_999_999_999)
+
         break unless Account.exists?(account_number: @account_number)
       end
 

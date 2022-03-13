@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Table: Accounts
 class Account < ApplicationRecord
   belongs_to :user
 

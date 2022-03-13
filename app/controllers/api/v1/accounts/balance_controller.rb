@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     module Accounts
-      class BalanceController < ApplicationController
-        before_action :authenticate_user!
-
+      # Balance API for Accounts
+      class BalanceController < BaseController
         def show
           render json: { balance: balance }, status: :ok
-        end 
+        end
 
         private
 

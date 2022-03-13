@@ -1,0 +1,14 @@
+AllCops:
+  Exclude:
+    - db/**/*
+    - config/**/*
+    - bin/*
+  NewCops: enable
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+  IgnoredMethods: ['describe', 'context']
+Style/Documentation:
+  Enabled: false

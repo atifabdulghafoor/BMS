@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Response Handler for services
 module ResponseHandler
   def handle_exception
     yield
@@ -6,11 +9,11 @@ module ResponseHandler
     nil
   end
 
-  def handle_response(success: false, message:)
+  def handle_response(message:, success: false)
     @response = {
       success: success,
       message: message,
-      status: success ? :ok : :unprocessable_entity 
+      status: success ? :ok : :unprocessable_entity
     }
   end
 

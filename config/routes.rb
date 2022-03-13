@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -9,7 +11,7 @@ Rails.application.routes.draw do
         get :transaction_history, to: 'accounts/transaction_history#index'
       end
 
-      resources :transfers, only: :create
+      resources :transactions, only: :create
     end
   end
 end

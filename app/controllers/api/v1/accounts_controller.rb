@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 module Api
   module V1
-    class AccountsController < ApplicationController
-      before_action :authenticate_user!
-
+    # Accounts API
+    class AccountsController < BaseController
       def create
         handler = Accounts::Create.call(current_user, account_params)
         render json: handler.response
-      end 
+      end
 
       private
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
@@ -12,9 +13,11 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
     let(:account1) { create(:account) }
     let(:params) do
       {
-        sender_id: account.id,
-        recipient_id: account1.id,
-        amount: amount
+        transaction: {
+          sender_id: account.id,
+          recipient_id: account1.id,
+          amount: amount
+        }
       }
     end
 
@@ -24,10 +27,9 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
     end
 
     context 'when user is logged in' do
-
       before do
-         sign_in user
-         create_transaction
+        sign_in user
+        create_transaction
       end
 
       it ' creates transaction' do

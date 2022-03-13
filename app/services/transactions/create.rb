@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 module Transactions
+  # Service for Transactions creation
   class Create
     include ResponseHandler
-    
+
     attr_reader :user, :params, :response
 
     def self.call(user, params)
