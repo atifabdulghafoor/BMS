@@ -61,11 +61,11 @@ module Transactions
     end
 
     def update_sender_balance
-      sender_account.decrement!(:balance, amount)
+      sender_account.update!(balance: sender_account.balance - amount)
     end
 
     def update_recipient_balance
-      recipient_account.increment!(:balance, amount)
+      recipient_account.update!(balance: recipient_account.balance + amount)
     end
   end
 end
