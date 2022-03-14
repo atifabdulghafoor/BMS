@@ -35,7 +35,11 @@ module Transactions
 
     private
 
-    def handle_success
+    def amount
+      @amount ||= params[:amount].to_d
+    end
+
+    def success_response
       handle_response(success: true, message: 'Transfer created successfully!')
     end
 
@@ -43,7 +47,7 @@ module Transactions
       {
         sender: sender_account,
         recipient: recipient_account,
-        amount: params[:amount],
+        amount: amount,
         request_digest: params[:request_digest]
       }
     end
@@ -57,11 +61,11 @@ module Transactions
     end
 
     def update_sender_balance
-      sender_account.decrement!(:balance, params[:amount])
+      sender_account.decrement!(:balance, amount)
     end
 
     def update_recipient_balance
-      recipient_account.increment!(:balance, params[:amount])
+      recipient_account.increment!(:balance, amount)
     end
   end
 end

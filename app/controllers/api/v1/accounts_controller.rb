@@ -6,7 +6,7 @@ module Api
     class AccountsController < BaseController
       def create
         handler = Accounts::Create.call(current_user, account_params)
-        render json: handler.response
+        render json: handler.response, status: handler.response[:status]
       end
 
       private

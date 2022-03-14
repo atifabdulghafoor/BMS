@@ -14,8 +14,8 @@ RSpec.describe Transaction, type: :model do
     it { should validate_presence_of(:request_digest) }
     it { should validate_uniqueness_of(:request_digest) }
     it do
-      should validate_numericality_of(:amount).
-        is_greater_than(0.0)
+      should validate_numericality_of(:amount)
+        .is_greater_than(0.0)
     end
   end
 

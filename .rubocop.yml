@@ -10,5 +10,7 @@ Metrics/BlockLength:
     - '**/*.rake'
     - 'spec/**/*.rb'
   IgnoredMethods: ['describe', 'context']
+Metrics/MethodLength:
+  Max: 15
 Style/Documentation:
   Enabled: false

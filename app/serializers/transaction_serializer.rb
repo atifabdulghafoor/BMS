@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TransactionSerializer < ActiveModel::Serializer
   attributes :id, :sender_account_number, :recipient_account_number,
              :amount, :created_at

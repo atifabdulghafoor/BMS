@@ -30,8 +30,8 @@ RSpec.describe Account, type: :model do
     it { should validate_presence_of(:balance) }
     it { should validate_uniqueness_of(:account_number).case_insensitive }
     it do
-      should validate_numericality_of(:balance).
-        is_greater_than_or_equal_to(0.0)
+      should validate_numericality_of(:balance)
+        .is_greater_than_or_equal_to(0.0)
     end
   end
 

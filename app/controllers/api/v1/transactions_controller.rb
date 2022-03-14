@@ -6,7 +6,7 @@ module Api
     class TransactionsController < BaseController
       def create
         handler = Transactions::Create.call(current_user, transaction_params)
-        render json: handler.response
+        render json: handler.response, status: handler.response[:status]
       end
 
       private
