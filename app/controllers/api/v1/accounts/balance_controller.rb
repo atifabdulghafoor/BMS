@@ -16,7 +16,7 @@ module Api
         end
 
         def account
-          current_user.account.find(params[:account_id])
+          current_user.accounts.find(params[:account_id])
         end
       end
     end

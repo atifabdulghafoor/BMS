@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::TransactionsController, type: :request do
   describe 'POST #create' do
-    let(:create_transaction) do
+    subject(:create_transaction) do
       post api_v1_transactions_path, headers: auth_headers, params: params
     end
 
