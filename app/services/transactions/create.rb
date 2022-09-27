@@ -21,7 +21,7 @@ module Transactions
       return success_response if Transaction.exists?(request_digest: params[:request_digest])
 
       handle_exception do
-        Redis.current.lock('transaction_create') do
+        Redis.current.lock("transaction_create_#{sender_account.id}_#{recipient_account.id}_#{amount}") do
           Transaction.transaction do
             Transaction.create!(transfer_params)
             update_sender_balance
